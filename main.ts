@@ -27,7 +27,7 @@ copyFileSync(new URL('./assets/entry.png', import.meta.url), outPath);
 
 const written = readFileSync(outPath);
 if (written.length < PNG_SIGNATURE.length || !written.subarray(0, PNG_SIGNATURE.length).equals(PNG_SIGNATURE)) {
-  console.error(`error: ${outPath} is not a valid PNG (bad signature)`);
+  console.error(`error: ${outPath} is not a valid PNG (bad signature, got ${written.subarray(0, Math.min(written.length, PNG_SIGNATURE.length)).toString('hex')})`);
   process.exit(1);
 }
 console.log(`wrote ${outPath} (${written.length} bytes)`);
